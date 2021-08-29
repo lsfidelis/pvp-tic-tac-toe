@@ -25,9 +25,13 @@ def game():
         else:
             break
 
-    # Valides index to insert player symbol (X/O) 
+    # Validates index to insert player symbol (X/O) 
     turns_count = 0
     while True:
+
+        if turns_count == 9:
+                print("\t\n ***** GAME OVER! It's a Tie! *****")
+                break
 
         show_board(general_board)
         print(f"\nIt's {player}'s turn.", end=' ')
@@ -47,7 +51,6 @@ def game():
             continue
 
         # Adds +1 to turns; Minimum tunrs to win the game = 5
-        turns_count += 1
         if turns_count >= 5:
             if general_board['1'] == general_board['2'] == general_board['3'] != ' ':
                 show_board(general_board)
@@ -97,13 +100,9 @@ def game():
                 print('-' * 35)                                     # Left-right Diagonal
                 break
 
-            elif turns_count == 9:
-                print("\t\n ***** GAME OVER! It's a Tie! *****")
-
         # Changes player turn
         if player == 'X':
             player = 'O'
-
         elif player == 'O':
             player = 'X'
 
@@ -124,8 +123,7 @@ def restart():
             break
 
         elif reset_game in 'y':
-
-            print('----- Restarting Tic Tac Toe... -----')
+            print('\033[31m----- Restarting Tic Tac Toe... -----\033[m')
             sleep(1)
 
             for keys in general_board.keys():
